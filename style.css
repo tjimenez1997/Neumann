@@ -14,8 +14,30 @@ body {
     text-align: center;
 }
 
-#gameUI { 
+#gameIntro{
     display: flex;
+    justify-content: center;
+}
+
+#acceptanceLetter{
+    color:white;
+    font-size: 1.1em;
+    white-space: pre-line;
+}
+
+#gameIntroOptions{
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    gap: 40px;
+}
+
+button {
+
+}
+
+#gameUI { 
+    display: none; /* Changes to flex when displayed */
     height: 100%;
     width: 100%;
     justify-content: center;
@@ -27,6 +49,8 @@ body {
     flex-direction: row;
     border: 2px solid grey;
 }
+
+
 #codeArea {
     width: 400px;
     height: 300px;

@@ -5,6 +5,25 @@
     </head>
     <body>
         <h1 id="title">Neumann Corp.</h1>
+        <div id="gameIntro">
+            <pre id="acceptanceLetter">
+                Dear Applicant No. 20658,
+                
+                You have been determined to be eligible to work for Neumann Corp by our placement algorithm.
+    
+                Begin your employment by powering on the corporate laptop in this package.
+                 
+                You will be provided onboarding instructions.
+    
+                Thank you,
+                Jeff Musk
+                Director of Human Capital @ Neumann Corp
+            </pre>
+        </div>
+        <div id="gameIntroOptions">
+            <button id="start">Turn on Laptop</button>
+            <button id="gameAlternativeEnding">Send Package to the Landfill</button>
+        </div>
         <div id="gameUI">
             <div id="splitScreen">
                 <canvas id="display" width="400" height="300">
@@ -12,5 +31,6 @@
             </div>
             <div id="codeArea"></div>
         </div>
+        <script type="module" src="main.js"></script>
     </body>
 </html>

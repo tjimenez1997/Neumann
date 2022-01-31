@@ -208,20 +208,15 @@ export default class UI {
         input.slice().reverse().forEach((element) => {
             context.fillText(element,23, inputHeight);
             inputHeight -= 50;
-            console.log(inputHeight)
         })
     }
 
     formattedTime = () => {
         let hour = this.model.hour;
         let minute = this.model.minute;
-
+        
         let time = "";
-        let morning = true;
         time += `${hour}:`
-        if(hour > 12) {
-            morning = false;
-        }
         if(minute == 0){
             time += "00";
         } else if (minute == 5) {
@@ -230,7 +225,7 @@ export default class UI {
             time += `${minute} `;
         }
 
-        if(morning) {
+        if(this.model.morning) {
             time += ' AM';
         } else {
             time += ' PM';

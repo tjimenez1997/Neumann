@@ -4,6 +4,7 @@ export default class Game {
         this.outputData = []; 
         this.temporaryInput = ["1","2","3","4"];
         this.temporaryOutput = [];
+        this.morning = true;
         this.levelStatus = "Running" //Standby - (Menu before next level/day) Running - Player is currently playing the current level
         this.level = 1;
         this.workday = 96; //8 Hour Workday... How lucky! (5 minute intervals in 8 hours)
@@ -23,27 +24,38 @@ export default class Game {
 
     timeLoop = async() => {
         let count = 0; //8 Hour Workday... How lucky!
-        await this.sleep(5000);
+        await this.sleep(500);
         while(count <= this.workday){
             this.minute += 5;
             this.minute = this.minute % 60;
             if(this.minute == 0){
                 this.hour += 1;
-                this.hour = this.hour % 12;
+                if(this.hour == 12){
+                    this.morning = false;
+                }
+                if(this.hour > 12) {
+                    this.hour = this.hour % 12;
+                }
             }
             this.ui.updateGameClock(); //Controller - Causes UI Update for Game Clock
-            await this.sleep(5000);
+            await this.sleep(500);
             count++;
         }
     }
 
     setAndRunPlayerCode = (playerCode) => {
         this.playerCodeString = playerCode;
-        let preTokenized = this.playerCodeString.split(" ");
-        this.tokenizeRawUserCode(preTokenized);
+        let tokenized = this.playerCodeString.split("\n");
+        tokenized = tokenized.filter((element) => {
+            return element !== '';
+        });
+
+        console.log("get input;".split(" "))
+
+        this.runUserCode(tokenized);//Run These Instructions
     }
 
-    tokenizeRawUserCode = (array) => {
+    runUserCode = (array) => {
         /*let userCode = [];
         for(let i = 0; i < array.length; i++){
             let currentWord = array[i];

@@ -1,0 +1,20 @@
+{
+  "name": "neumann",
+  "version": "1.0.0",
+  "description": "A game based on a true story about a software engineer.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjimenez1997/Neumann.git"
+  },
+  "author": "Thomas Jimenez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tjimenez1997/Neumann/issues"
+  },
+  "homepage": "https://github.com/tjimenez1997/Neumann#readme",
+  "dependencies": {}
+}

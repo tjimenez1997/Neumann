@@ -2,9 +2,15 @@
 <html>
     <head>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/theme/liquibyte.min.css"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/clike/clike.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/addon/display/autorefresh.min.js"></script>
     </head>
     <body>
         <h1 id="title">Neumann Corp.</h1>
+        <p id="gameTime"></p>
         <div id="gameIntro">
             <pre id="acceptanceLetter">
                 Dear Applicant No. 20658,
@@ -29,7 +35,10 @@
                 <canvas id="display" width="400" height="300">
                 </canvas>      
             </div>
-            <div id="codeArea"></div>
+            <div id="codeArea">
+               <textarea id="editor">get input;</textarea>
+               <button id="execute">Execute</button>
+            </div>
         </div>
         <script type="module" src="main.js"></script>
     </body>

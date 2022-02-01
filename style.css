@@ -3,6 +3,7 @@ body {
     flex-direction: column;
     background-color: black;
     height: 100vh;
+    max-height: 100vh;
     width: 100vw;
     margin: 0 auto;
 }
@@ -48,7 +49,7 @@ button {
 
 #gameUI { 
     display: none; /* Changes to flex when displayed */
-    height: 100%;
+    height: 304px;
     width: 100%;
     justify-content: center;
     align-content: center;
@@ -68,6 +69,9 @@ button {
     border: 2px solid grey;
 }
 
+#splitScreen{
+    height: 304px;
+}
 /*#editor {
     white-space: pre-wrap;
 }*/
@@ -76,6 +80,80 @@ button {
     position: absolute;
     bottom:10px;
     right:20px;
+}
+
+#gameOptions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height:100%;
+}
+
+#gameOptions h2 {
+    display: none;
+    color: white;
+    font-family: 'Courier New', monospace;
+}
+#languageGuide {
+    display: none;
+ 
+}
+
+#languageGuideScreen {
+    display: none; 
+    position: fixed; 
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto;
+    background-color: rgba(0, 255, 0, 0.5); 
+}
+
+#screenContent {
+    background-color: black;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid grey;
+    width: 40%;
+}
+
+#screenContent pre {
+    white-space: pre-line;
+    margin-top: 50px;
+    text-align: center;
+    color: white;
+}
+#closeGuide {
+    color: white;
+    float: right;
+    font-size: 25px;
+    font-weight: bold;
+}
+#closeGuide:hover,
+#closeGuide:focus {
+  color: green;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#error {
+  display: none;
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 80%;
+  z-index: 6;
+}
+
+#errorMessage{
+    font-size: 6em;
+    color: red;
+   
 }
 
 @font-face {

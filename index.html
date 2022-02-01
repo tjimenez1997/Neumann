@@ -9,6 +9,9 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/addon/display/autorefresh.min.js"></script>
     </head>
     <body>
+        <div id="error">
+            <h1 id="errorMessage">ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR</h1>
+        </div>
         <h1 id="title">Neumann Corp.</h1>
         <p id="gameTime"></p>
         <div id="gameIntro">
@@ -38,8 +41,36 @@
             <div id="codeArea">
                <textarea id="editor">get input;</textarea>
                <button id="execute">Execute</button>
+            </div> 
+        </div>
+        <div id="gameOptions">
+            <h2 id="gameOptionsTitle">Inventory</h2>
+            <button id="languageGuide">VONN LANGUAGE SPEC V0.01</button>
+            <div id="languageGuideScreen">
+                <div id="screenContent">
+                <span id="closeGuide">&times;</span>
+                <pre>
+                    Vonn Language Specification (v0.1):
+
+                    Every line of code must be on a new line;
+                    
+                    Every line must end with a semi-colon;
+                    
+                    
+                    
+                    
+                    
+                    Feel free to go crazy with the new lines;
+                    
+                    FUNCTIONS:
+                    
+                    get [option: input];
+                    return [option: output];
+                </pre>
+                </div> 
             </div>
         </div>
+        
         <script type="module" src="main.js"></script>
     </body>
 </html>

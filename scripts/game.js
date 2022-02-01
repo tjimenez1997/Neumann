@@ -1,7 +1,6 @@
 export default class Game {
     constructor() {
-        this.inputData = [];
-        this.outputData = []; 
+        this.inputData = ["1","2","3","4"];   
         this.temporaryInput = ["1","2","3","4"];
         this.temporaryOutput = [];
         this.morning = true;
@@ -12,8 +11,7 @@ export default class Game {
         this.minute= 0;
         this.playerCodeString = "";
         this.playerCode = []
-        this.solutionCodeString = "4,3,2,1"; //Formatted with Commas to make it easier
-        this.solutionCode = [];
+        this.solutionCode = ["4","3","2","1"];
     }
 
     sleep = (ms) => {
@@ -50,12 +48,12 @@ export default class Game {
             return element !== '';
         });
 
-        console.log("get input;".split(" "))
+        
 
         this.runUserCode(tokenized);//Run These Instructions
     }
 
-    runUserCode = (array) => {
+    runUserCode = async(array) => {
         /*let userCode = [];
         for(let i = 0; i < array.length; i++){
             let currentWord = array[i];
@@ -66,6 +64,30 @@ export default class Game {
         }*/
         this.playerCode = array;
         console.log(this.playerCode);
+        for(let index = 0; index < this.playerCode.length; index++){
+            if(this.playerCode[index].includes("get") && this.playerCode[index].substring(0,3) == 'get'){
+                this.ui.moveIndicator(this.playerCode[index].substring(4,this.playerCode[index].length)); //Make sound after
+                this.ui.highlightCodeLine(index);
+            }
+            let audio = new Audio('../assets/sounds/codeline.mp3');
+            audio.play();
+            await this.sleep(2000); //audio before
+            this.ui.clearHighlights();
+        }
+    
+        
+        if(this.temporaryOutput === this.solutionCode) {
+            console.log("correct solution");
+        } else {
+            this.temporaryInput = this.inputData;
+            this.temporaryOutput = [];
+            let audio = new Audio('../assets/sounds/error.mp3');
+            audio.play();
+            this.ui.displayError();
+            await this.sleep(2000);
+            this.ui.refreshDisplayData();
+            console.log("incorrect solution!!! ERRROR try again")
+        }
     }
 
 

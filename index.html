@@ -12,8 +12,15 @@
         <div id="error">
             <h1 id="errorMessage">ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR</h1>
         </div>
+        <div id="loss">
+            <h1 id="lossMessage">YOUR FIRED YOUR FIRED YOUR FIRED YOUR FIRED YOUR FIRED YOUR FIRED YOUR FIRED YOUR FIRED</h1>
+        </div>
+        <div id="win">
+            <h1 id="winMessage">TO BE CONTINUED...</h1>
+        </div>
         <h1 id="title">Neumann Corp.</h1>
         <p id="gameTime"></p>
+        <p id="expectedOutput">Expected Output: </p>
         <div id="gameIntro">
             <pre id="acceptanceLetter">
                 Dear Applicant No. 20658,
@@ -66,6 +73,8 @@
                     
                     get [option: input];
                     return [option: output];
+                    copyto [option: 0,1,2,3];
+                    copyfrom [option: 0,1,2,3];
                 </pre>
                 </div> 
             </div>

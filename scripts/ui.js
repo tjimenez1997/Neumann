@@ -18,7 +18,7 @@ export default class UI {
         document.querySelector("#languageGuide").addEventListener("click", this.openGuide);
         document.querySelector("#closeGuide").addEventListener("click", this.closeGuide);
         document.querySelector("#execute").addEventListener("click", this.executePlayerCode);
-        this.drawDisplayNoMemory();
+        this.drawDisplayNoMemory(); //change this after level 3
         this.drawIndicator(this.indicatorLocation.x, this.indicatorLocation.y, this.indicatorLocation.width, this.indicatorLocation.height); //Center
     }
 
@@ -44,6 +44,7 @@ export default class UI {
         }, 100);
 
         let gameTime = document.querySelector("#gameTime");
+        let output = document.querySelector("#expectedOutput");
         let letter = document.querySelector("#acceptanceLetter");
         let startButtons = document.querySelector("#gameIntroOptions");
         let gameDisplay = document.querySelector("#gameUI");
@@ -53,12 +54,23 @@ export default class UI {
         startButtons.remove();
         gameDisplay.style.display = "flex";
         gameTime.style.display = "block";
+        gameTime.style.marginBottom = "20px";
+        output.style.display = "block";
+        output.style.marginBottom = "20px";
         guide.style.display = "block";
         gameOptionsTitle.style.display = "block";
 
         //Change Game Time using Game Model
         document.querySelector("#gameTime").innerText = `Day ${this.model.level} - Time: ${this.model.hour}:${this.model.minute == 0 ? '00' : this.model.minute} AM`;
+        let currentSolution = eval("this.model.solution"+this.model.level);
+        //console
+        document.querySelector("#expectedOutput").innerText = `Expected Output: [${currentSolution}]`
         this.model.timeLoop();
+    }
+    
+    displayNewSolution = () => {
+        let currentSolution = eval("this.model.solution"+this.model.level);
+        document.querySelector("#expectedOutput").innerText = `Expected Output: [${currentSolution}]`;
     }
 
     drawDisplayNoMemory = () => {
@@ -429,6 +441,8 @@ export default class UI {
 
     refreshDisplayData() {
         let input = this.model.temporaryInput;
+        let output = this.model.temporaryOutput;
+        let memory = this.model.temporarySave;
         let context = this.canvas.getContext("2d");
         this.drawIndicator(200,200,8,8)
         context.fillStyle = "yellow";
@@ -439,6 +453,31 @@ export default class UI {
             context.fillText(element,23, inputHeight);
             inputHeight -= 50;
         })
+
+        inputHeight = 277;
+        output.slice().reverse().forEach((element) => {
+            context.fillText(element,373, inputHeight);
+            inputHeight -= 50;
+        })
+
+        let startingX = 122;
+        if(this.model.level > 3){
+            if(this.model.temporarySave.every(item => item === "")){
+                for(let count = 0; count < 4; count++){
+                    context.beginPath();
+                    context.strokeStyle = "black";
+                    context.rect(startingX,18,8,8);
+                    context.stroke();
+                    startingX += 50;
+                }
+               
+            } else {
+                memory.forEach((element) => {
+                    context.fillText(element,startingX, 25);
+                    startingX += 50;
+                });
+            }
+        }
     }
 
     drawIndicator = (x,y,width,height) => {
@@ -493,10 +532,8 @@ export default class UI {
     }
 
     moveIndicator = (location) => {
-        console.log(location)
-        if (location == "input;") {
+        if (location === "input;") {
          let inputHeight = this.model.temporaryInput.length;
-         console.log(inputHeight)
          let heightModifier = (inputHeight-1) * 50;
          let context = this.canvas.getContext("2d");
          context.beginPath();
@@ -506,12 +543,82 @@ export default class UI {
          
          this.drawIndicator(22,272-heightModifier, 8, 8);
       
+        } else if (location == "output;"){
+            this.refreshDisplayData();
+
+        } else if (location == "0;") {
+            let context = this.canvas.getContext("2d");
+            context.beginPath();
+            context.rect(122,20, 8, 8);
+            context.strokeStyle = "black";
+            context.stroke();
+            if(this.model.temporaryInstruction == 'copyfrom') {
+                this.drawIndicator(122,18,8,8);
+            } else if(this.model.temporaryInstruction == 'copyto'){
+                this.refreshDisplayData();
+            }
+            //this.drawIndicator(122,18, 8, 8);
+        } else if (location == "1;") {
+            let context = this.canvas.getContext("2d");
+            context.beginPath();
+            context.rect(172,20, 8, 8);
+            context.strokeStyle = "black";
+            context.stroke();
+            if(this.model.temporaryInstruction == 'copyfrom') {
+                this.drawIndicator(172,18, 8, 8);
+            } else if(this.model.temporaryInstruction == 'copyto'){
+                this.refreshDisplayData();
+            }
+        } else if (location == "2;") {
+            let context = this.canvas.getContext("2d");
+            context.beginPath();
+            context.rect(222,20, 8, 8);
+            context.strokeStyle = "black";
+            context.stroke();
+            if(this.model.temporaryInstruction == 'copyfrom') {
+                this.drawIndicator(222,18, 8, 8);
+            } else if(this.model.temporaryInstruction == 'copyto'){
+                
+                this.refreshDisplayData();
+            }
+    
+        } else if (location == "3;") {
+            let context = this.canvas.getContext("2d");
+            context.beginPath();
+            context.rect(272,20, 8, 8);
+            context.strokeStyle = "black";
+            context.stroke();
+            if(this.model.temporaryInstruction == 'copyfrom') {
+                this.drawIndicator(272,18, 8, 8);
+            } else if(this.model.temporaryInstruction == 'copyto'){
+                this.refreshDisplayData();
+            }
         } else {
-            //ERROR
-            console.log("ERROR TRY AGAIN")
+            console.log(location)
+            this.deleteInputOutputData();
+            console.log("ERROR IN UI LOCATION")
         }
     }
+    
+    deleteInputOutputData = () => {
+        let context = this.canvas.getContext("2d");
+        for(let index = 0; index < 6; index++) {
+            let heightModifier = (index) * 50;
+            context.beginPath();
+            context.rect(22,272-heightModifier, 8, 8);
+            context.strokeStyle = "black";
+            context.stroke();
+        }
 
+        for(let index = 0; index < 6; index++) {
+            let heightModifier = (index) * 50;
+            context.beginPath();
+            context.rect(374,272-heightModifier, 8, 8);
+            context.strokeStyle = "black";
+            context.stroke();
+        }
+        
+    }
     highlightCodeLine = (number) => {
         this.editor.markText({line:number,ch:0},{line:number+1,ch:0},{css: "background-color : red"});
     }
@@ -525,5 +632,16 @@ export default class UI {
         await this.sleep(2000);
         error.style.display = "none";
     }
+
+    displayLoss = async() => {
+        let error = document.querySelector("#loss");
+        error.style.display = "block";
+    }
+    displayWin = async() => {
+        let win = document.querySelector("#win");
+        win.style.display = "block";
+    }
+
+    
 }
 

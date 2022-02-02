@@ -25,9 +25,23 @@ body {
     text-align: center;
 }
 
+#expectedOutput {
+    display: none;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2em;
+    margin-top: 0;
+    margin-bottom: 50px;
+    color: white;
+    text-align: center;
+}
+
 #gameIntro{
     display: flex;
     justify-content: center;
+}
+
+#gameAlternativeEnding{
+    display: none;
 }
 
 #acceptanceLetter{
@@ -152,9 +166,44 @@ button {
 
 #errorMessage{
     font-size: 6em;
-    color: red;
+    color: cyan;
    
 }
+
+#loss {
+    display: none;
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 80%;
+    z-index: 6;
+  }
+  
+  #lossMessage{
+      font-size: 6em;
+      color: red;
+     
+  }
+  #win {
+    display: none;
+    background-color: black;
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 100%;
+    height:100%;
+    z-index: 6;
+  }
+  
+  #winMessage{
+      font-size: 6em;
+      color: yellow;
+     
+  }
 
 @font-face {
     font-family: Frogotype;
